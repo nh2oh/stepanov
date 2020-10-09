@@ -10,7 +10,7 @@
 
 class fvector_int {
 public:
-	explicit fvector_int() : beg_(nullptr), back_(nullptr), end_(nullptr) {};
+	explicit fvector_int() : beg_(nullptr), last_(nullptr), end_(nullptr) {};
 	explicit fvector_int(std::ptrdiff_t);
 	fvector_int(const fvector_int&);
 
@@ -19,6 +19,7 @@ public:
 	~fvector_int();
 
 	std::ptrdiff_t size() const;
+	std::ptrdiff_t capacity() const;
 
 	int* begin();
 	int* back();
@@ -32,10 +33,12 @@ public:
 
 private:
 	int *beg_;
-	int *back_;
+	int *last_;
 	int *end_;
 };
 
 
 bool operator==(const fvector_int&, const fvector_int&);
 bool operator!=(const fvector_int&, const fvector_int&);
+bool operator<(const fvector_int&, const fvector_int&);
+
