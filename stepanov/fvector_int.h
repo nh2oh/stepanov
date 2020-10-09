@@ -41,4 +41,8 @@ private:
 bool operator==(const fvector_int&, const fvector_int&);
 bool operator!=(const fvector_int&, const fvector_int&);
 bool operator<(const fvector_int&, const fvector_int&);
+bool operator>(const fvector_int&, const fvector_int&);
+bool operator<=(const fvector_int&, const fvector_int&);
+bool operator>=(const fvector_int&, const fvector_int&);
+
 

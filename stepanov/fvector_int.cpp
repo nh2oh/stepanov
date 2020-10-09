@@ -107,4 +107,23 @@ bool operator<(const fvector_int& lhs, const fvector_int& rhs) {
 	return lhs.size() < rhs.size();
 }
 
+bool operator>(const fvector_int& lhs, const fvector_int& rhs) {
+	return rhs < lhs;
+}
+
+bool operator<=(const fvector_int& lhs, const fvector_int& rhs) {
+	return !(rhs < lhs);
+}
+
+bool operator>=(const fvector_int& lhs, const fvector_int& rhs) {
+	return !(lhs < rhs);
+}
+
+
+
+
+
+
+
+
 
