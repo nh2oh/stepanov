@@ -45,4 +45,22 @@ bool operator>(const fvector_int&, const fvector_int&);
 bool operator<=(const fvector_int&, const fvector_int&);
 bool operator>=(const fvector_int&, const fvector_int&);
 
+// Total memory utilization stack + heap
+std::ptrdiff_t areaof(const fvector_int&);
+// Size on heap / (size on stack + size on heap)
+double memory_utilization(const fvector_int&);
+
+template <typename T>
+void swap(T& x, T& y) {
+	T tmp = y;
+	y = x;
+	x = tmp;
+}
+
+
+
+void fvector_int_copy_assign();
+
+
+
 

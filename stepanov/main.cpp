@@ -1,8 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
+#include "fvector_int.h"
+
 
 int main() {
+
+	fvector_int_copy_assign();
+
+
+
+
 	std::vector<int> v1(6);
 	std::vector<int> v2(123);
 

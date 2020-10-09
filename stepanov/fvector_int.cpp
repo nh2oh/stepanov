@@ -2,6 +2,7 @@
 #include <cstddef>  // std::ptrdiff_t
 #include <cstring>  // std::memcpy
 #include <numeric>  // std::min
+#include <cassert>
 
 
 fvector_int::fvector_int(std::ptrdiff_t sz) {
@@ -21,10 +22,10 @@ fvector_int::fvector_int(const fvector_int& rhs) {
 }
 
 fvector_int& fvector_int::operator=(const fvector_int& rhs) {
-	if (this->beg_ == rhs.beg_) {
+	if (this == &rhs) {
 		return *this;
 	}
-	
+
 	auto rhs_cap = rhs.end_ - rhs.beg_;
 	auto rhs_n = rhs.last_ - rhs.beg_;
 
@@ -119,11 +120,31 @@ bool operator>=(const fvector_int& lhs, const fvector_int& rhs) {
 	return !(lhs < rhs);
 }
 
+std::ptrdiff_t areaof(const fvector_int& v) {
+	return sizeof(v) + v.size()*sizeof(int);
+}
+double memory_utilization(const fvector_int& v) {
+	return static_cast<double>(v.size()*sizeof(int)) / static_cast<double>(areaof(v));
+}
 
 
 
+void fvector_int_copy_assign() {
+	fvector_int a(100);
+	fvector_int b(3);
+
+	// Copy assignment and copy construction behave in exactly the same way
+	// Assign a small thing to a big thing
+	a = b;
+	assert(a==b && a.size()==b.size() && a.capacity()==b.capacity(),
+		"a==b && a.size()==b.size() && a.capacity()==b.capacity()");
+	fvector_int c(a);
+	assert(a==c && a.size()==c.size() && a.capacity()==c.capacity(),
+		"a==c && a.size()==c.size() && a.capacity()==c.capacity()");
 
 
+	return;
+}
 
 
 
