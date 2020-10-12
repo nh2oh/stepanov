@@ -5,8 +5,10 @@
 //
 // Notes on Programming 2018 (Alexander Stepanov)
 // Chapter 2 "Lecture 2.  Designing fvector_int"
+// Chapter 3.  "Continuing with fvector_int"
 //
 
+namespace nop {  // "notes on programming"
 
 class fvector_int {
 public:
@@ -31,6 +33,8 @@ public:
 	int& operator[](std::ptrdiff_t);
 	const int& operator[](std::ptrdiff_t) const;
 
+
+	friend void swap(fvector_int&, fvector_int&);
 private:
 	int *beg_;
 	int *last_;
@@ -62,5 +66,5 @@ void swap(T& x, T& y) {
 void fvector_int_copy_assign();
 
 
-
+};  // namespace nop
 
