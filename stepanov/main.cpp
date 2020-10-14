@@ -6,7 +6,7 @@
 
 int main() {
 
-	fvector_int_copy_assign();
+	nop::fvector_int_copy_assign();
 
 
 

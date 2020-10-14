@@ -128,12 +128,26 @@ double nop::memory_utilization(const nop::fvector_int& v) {
 	return static_cast<double>(v.size()*sizeof(int)) / static_cast<double>(areaof(v));
 }
 
-
-void nop::swap(nop::fvector_int& x, nop::fvector_int& y) {
-	swap(x.beg_,y.beg_);
-	swap(x.last_,y.last_);
-	swap(x.end_,y.end_);
+void nop::move_raw(nop::fvector_int& x, nop::fvector_int::underlying_t& y) {
+	x.beg_ = y.beg_;
+	x.last_ = y.last_;
+	x.end_ = y.end_;
 }
+void nop::move_raw(nop::fvector_int::underlying_t& x, nop::fvector_int& y) {
+	x.beg_ = y.beg_;
+	x.last_ = y.last_;
+	x.end_ = y.end_;
+}
+void nop::move_raw(nop::fvector_int& x, nop::fvector_int& y) {
+	x.beg_ = y.beg_;
+	x.last_ = y.last_;
+	x.end_ = y.end_;
+}
+//void nop::swap(nop::fvector_int& x, nop::fvector_int& y) {
+//	nop::swap(x.beg_,y.beg_);
+//	nop::swap(x.last_,y.last_);
+//	nop::swap(x.end_,y.end_);
+//}
 
 
 void nop::fvector_int_copy_assign() {

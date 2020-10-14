@@ -12,6 +12,12 @@ namespace nop {  // "notes on programming"
 
 class fvector_int {
 public:
+	struct underlying_t {
+		int *beg_;
+		int *last_;
+		int *end_;
+	};
+
 	explicit fvector_int() : beg_(nullptr), last_(nullptr), end_(nullptr) {};
 	explicit fvector_int(std::ptrdiff_t);
 	fvector_int(const fvector_int&);
@@ -34,7 +40,10 @@ public:
 	const int& operator[](std::ptrdiff_t) const;
 
 
-	friend void swap(fvector_int&, fvector_int&);
+	//friend void swap(fvector_int&, fvector_int&);
+	friend void move_raw(fvector_int&, fvector_int::underlying_t&);
+	friend void move_raw(fvector_int::underlying_t&, fvector_int&);
+	friend void move_raw(fvector_int&, fvector_int&);
 private:
 	int *beg_;
 	int *last_;
@@ -54,13 +63,30 @@ std::ptrdiff_t areaof(const fvector_int&);
 // Size on heap / (size on stack + size on heap)
 double memory_utilization(const fvector_int&);
 
-template <typename T>
-void swap(T& x, T& y) {
-	T tmp = y;
-	y = x;
-	x = tmp;
+template<typename T>
+struct underlying_type_traits {
+	using underlying_type = T;
+};
+
+template<>
+struct underlying_type_traits<nop::fvector_int> {
+	using underlying_type = typename nop::fvector_int::underlying_t;
+};
+
+// Generic move raw; is overridden my friend move_raw(...) for
+// classes that manage resources.  
+template<typename T>
+void move_raw(T& x, T& y) {
+	x = y;
 }
 
+template <typename T>
+void swap(T& x, T& y) {
+	nop::underlying_type_traits<T> tmp;
+	nop::move_raw(tmp, x);
+	nop::move_raw(x, y);
+	nop::move_raw(y, tmp);
+}
 
 
 void fvector_int_copy_assign();
