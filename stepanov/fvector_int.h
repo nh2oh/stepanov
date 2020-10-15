@@ -6,6 +6,8 @@
 // Notes on Programming 2018 (Alexander Stepanov)
 // Chapter 2 "Lecture 2.  Designing fvector_int"
 // Chapter 3.  "Continuing with fvector_int"
+// ...
+// Chapter 5 "Lecture 5. Types and type functions"
 //
 
 namespace nop {  // "notes on programming"
