@@ -33,13 +33,15 @@ void nop::benchmark_less_abs() {
 	for (int i=0; i<10; ++i) {
 		auto rnums = rnums_init;
 		auto t_start = std::chrono::steady_clock::now();
-		std::sort(rnums.begin(),rnums.end(),nop::less_abs_fun);
+		//std::sort(rnums.begin(),rnums.end(),nop::less_abs_fun);
+		std::sort(rnums.data(),rnums.data()+rnums.size(),nop::less_abs_fun);
 		auto t_end = std::chrono::steady_clock::now();
 		fun_times.push_back(t_end-t_start);
 
 		rnums = rnums_init;
 		t_start = std::chrono::steady_clock::now();
-		std::sort(rnums.begin(),rnums.end(),nop::less_abs());
+		//std::sort(rnums.begin(),rnums.end(),nop::less_abs());
+		std::sort(rnums.data(),rnums.data()+rnums.size(),nop::less_abs());
 		t_end = std::chrono::steady_clock::now();
 		fun_obj_times.push_back(t_end-t_start);
 	}
