@@ -72,12 +72,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="function_objects.cpp" />
     <ClCompile Include="fvector_int.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="strict_weak_ordered_t.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="function_objects.h" />
     <ClInclude Include="fvector_int.h" />
     <ClInclude Include="ordering.h" />
+    <ClInclude Include="strict_weak_ordered_t.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

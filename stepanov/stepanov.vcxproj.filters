@@ -21,12 +21,24 @@
     <ClCompile Include="fvector_int.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="strict_weak_ordered_t.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="function_objects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fvector_int.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ordering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strict_weak_ordered_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="function_objects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
