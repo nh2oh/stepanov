@@ -17,7 +17,9 @@ bool nop::less_abs::operator()(double lhs, double rhs) const {
 
 
 
-
+//
+// Compare the use of a function object with a function pointer
+//
 void nop::benchmark_less_abs() {
 	std::random_device rd;
 	std::mt19937 re(rd());

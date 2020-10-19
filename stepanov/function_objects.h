@@ -58,6 +58,45 @@ struct binder2nd {
 	}
 };
 
+
+// struct binary_compose takes F(x,y), G(x), H(x) and returns a function object
+// that does F(G(x), H(y))
+template<typename F, typename G, typename H>
+struct binary_compose {
+	using arg_g_t = typename G::arg_t;
+	using arg_h_t = typename H::arg_t;
+	using result_t = typename F::result_t;
+
+	F f_;
+	G g_;
+	H h_;
+
+	binary_compose(const F& f, const G& g, const H& h) : f_(f), g_(g), h_(h) {}
+
+	result_type operator()(const arg_g_t& x, const arg_h_t& y) const {
+		return f_(g_(x),h_(y));
+	}
+
+};
+
+
+// struct f_transpose takes f(x,y) and returns a function object that does f(y,x)
+template<typename F>
+struct f_transpose {
+	using arg_t = F::arg_t;
+	using result_t = F::result_t;
+
+	F f_;
+
+	f_transpose(const F& f) : f_(f) {}
+
+	result_t operator()(const arg_t& x, const arg_t& y) const {
+		return f_(y,x);
+	}
+};
+
+
+
 };  // namespace nop
 
 
