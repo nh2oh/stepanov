@@ -1,6 +1,6 @@
 #pragma once
 #include <utility>  // std::pair
-
+#include <cstddef>  // std::size_t
 
 //
 // Notes on Programming 2018 (Alexander Stepanov)
@@ -24,6 +24,10 @@ struct increment {
 		++x;
 	}
 };
+
+
+//-----------------------------------------------------------------------------
+// The "advance" family are actions that modify their arguments
 
 // Generalized advance to apply an action n times
 template<typename T, typename A, typename I>
@@ -83,7 +87,35 @@ T successor(T x) {
 	return x;
 }
 
-template<typename T
+
+//-----------------------------------------------------------------------------
+// Distance
+
+// count_type_traits<T>::type is a type big enough to hold all distinct 
+// _values_ of T, not, for example, the max distance in memory that can 
+// seperate two objects of T.  
+template<typename T>
+struct count_type_traits {
+	using type = std::size_t;
+};
+template<>
+struct count_type_traits<short> {
+	using type = unsigned short;
+};
+
+// distance() does not count the distance in memory between two T's, it counts 
+// the number of _values_ of T between the values first and last.  
+template<typename T, typename A>
+typename nop::count_type_traits<T>::type distance(T first, const T& last, A a) {
+	typename nop::count_type_traits<T>::type n(0);
+	while (first != last) {
+		a(first);
+		++n;
+	}
+	return n;
+}
+
+
 
 
 
