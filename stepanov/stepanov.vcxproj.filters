@@ -47,5 +47,8 @@
     <ClInclude Include="generic_algs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="actions_orbits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
