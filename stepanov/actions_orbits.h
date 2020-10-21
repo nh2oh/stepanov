@@ -116,7 +116,56 @@ typename nop::count_type_traits<T>::type distance(T first, const T& last, A a) {
 }
 
 
+//-----------------------------------------------------------------------------
+// Cycles
 
+
+// If first==second in the pair returned, the orbit is cyclical, if not, the orbit
+// is bottom terminating.  
+template<typename T, typename A>
+std::pair<T,T> detect_cycle(const T& x, A a) {
+	auto fast = x;
+	auto slow = x;
+
+	if (!nop::is_defined(fast,a)) {
+		return std::pair<T,T> {slow,fast};
+	}
+
+	do {
+		a(fast);
+		if (!nop::is_defined(fast,a)) {
+			break;
+		}
+		a(slow);
+		a(fast);
+
+		if (!nop::is_defined(fast,a)) {
+			break;
+		}
+	} while (fast != slow);
+
+	return std::pair<T,T> {slow,fast};
+}
+
+
+template<typename T, typename A>
+typename nop::count_type_traits<T>::type cycle_length(const T& x, A a) {
+	using count_t = typename nop::count_type_traits<T>::type;
+	auto next = nop::successor_n(x,1,a);
+	return nop::distance(next,x,a) + count_t(1);
+}
+
+
+// Returns the first point of the cycle provided that initially second is 
+// exactly one cycle length ahead of first.  
+template<typename T, typename A>
+T convergence_point(T first, T second, A a) {
+	while (first != second) {
+		a(first);
+		a(second);
+	}
+	return first;
+}
 
 
 

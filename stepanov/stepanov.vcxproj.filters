@@ -30,6 +30,9 @@
     <ClCompile Include="generic_algs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="actions_orbits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fvector_int.h">
