@@ -1,8 +1,10 @@
 #include <iostream>
+#include "instrumented.h"
+
 
 
 int main() {
-	std::cout << "yay" << std::endl;
+	a9::test_instrumented();
 
 	return 0;
 }
