@@ -21,9 +21,15 @@
     <ClCompile Include="instrumented.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="count_operations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="instrumented.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="count_operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

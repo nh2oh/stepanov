@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include <cstddef>  // std::size_t
+#include <vector>
+#include <string>
+
 
 namespace a9 {
 
@@ -10,20 +13,41 @@ struct instrumented_base {
 		default_construct,copy_construct,copy_assign,destruct,
 		compare_equal,compare_less
 	};
+	static const std::size_t num_ops = 6;
+	static std::size_t counts[num_ops];
+	//static const char* op_names[num_ops];
+	static std::vector<std::string> op_names;
 
-	static std::size_t* counts[6];
+	static void initialize(std::size_t);
 };
 
 template<typename T>
-struct instrumented {
+struct instrumented : instrumented_base {
 	T value;
 
-	instrumented() {};
+	instrumented() {
+		counts[default_construct] += 1;
+	}
+
 	explicit instrumented(const T& x) : value(x) {};
-	instrumented(const instrumented& x) : value(x.value) {};
+
+	instrumented(const instrumented& x) : value(x.value) {
+		counts[copy_construct] += 1;
+	}
 
 	instrumented& operator=(const instrumented& rhs) {
+		counts[copy_assign] += 1;
 		value = rhs.value;
+		return *this;
+	}
+
+	/*instrumented& operator=(const T& rhs) {
+		value = rhs;
+		return *this;
+	}*/
+
+	~instrumented() {
+		counts[destruct] += 1;
 	}
 
 	// This should work but does not compile
@@ -38,38 +62,39 @@ struct instrumented {
 		out << rhs.value;
 		return out;
 	}*/
+
+
+
+	friend bool operator==(const instrumented& lhs, const instrumented& rhs) {
+		counts[compare_equal] += 1;
+		return lhs.value == rhs.value;
+	}
+
+	friend bool operator!=(const instrumented& lhs, const instrumented& rhs) {
+		return !(lhs == rhs);
+	}
+
+	friend bool operator<(const instrumented& lhs, const instrumented& rhs) {
+		counts[compare_less] += 1;
+		return lhs.value < rhs.value;
+	}
+
+	friend bool operator>(const instrumented& lhs, const instrumented& rhs) {
+		return rhs < lhs;
+	}
+
+	friend bool operator<=(const instrumented& lhs, const instrumented& rhs) {
+		return !(rhs < lhs);
+	}
+
+	friend bool operator>=(const instrumented& lhs, const instrumented& rhs) {
+		return !(lhs < rhs);
+	}
+
 };
 
 
-template<typename T>
-bool operator==(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return lhs.value == rhs.value;
-}
 
-template<typename T>
-bool operator!=(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return !(lhs == rhs);
-}
-
-template<typename T>
-bool operator<(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return lhs.value < rhs.value;
-}
-
-template<typename T>
-bool operator>(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return rhs < lhs;
-}
-
-template<typename T>
-bool operator<=(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return !(rhs < lhs);
-}
-
-template<typename T>
-bool operator>=(const instrumented<T>& lhs, const instrumented<T>& rhs) {
-	return !(lhs < rhs);
-}
 
 
 void test_instrumented();
