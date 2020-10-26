@@ -15,10 +15,9 @@ struct instrumented_base {
 	};
 	static const std::size_t num_ops = 6;
 	static std::size_t counts[num_ops];
-	//static const char* op_names[num_ops];
 	static std::vector<std::string> op_names;
 
-	static void initialize(std::size_t);
+	static void initialize();
 };
 
 template<typename T>

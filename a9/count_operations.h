@@ -10,6 +10,7 @@
 namespace a9 {
 
 void print_counts_table(const std::vector<std::string>&, 
+						const std::vector<std::size_t>&, 
 						const std::vector<std::vector<std::size_t>>&);
 std::size_t num_digits_positive_int(std::size_t);
 
@@ -21,7 +22,6 @@ void count_operations(std::size_t min_num_el, std::size_t max_num_el, F f) {
 	double r = static_cast<double>(max_num_el)/static_cast<double>(min_num_el);
 	auto niter = static_cast<std::size_t>(std::max(std::ceil(std::log2(r)),0.0));
 
-	//std::vector<std::size_t> curr_row(a9::instrumented_base::num_ops);
 	std::vector<std::vector<std::size_t>> 
 		results_table(niter,std::vector<std::size_t>(a9::instrumented_base::num_ops,0));
 	std::vector<std::size_t> numel; numel.reserve(niter);
@@ -32,27 +32,20 @@ void count_operations(std::size_t min_num_el, std::size_t max_num_el, F f) {
 		for (std::size_t i = 0; i < v.size(); ++i) {
 			v[i] = a9::instrumented<double>(static_cast<double>(i));
 		}
-		//std::iota(v.begin(),v.end(),a9::instrumented<double>(0.0));
 		std::shuffle(v.begin(),v.end(),rg);
 
-		a9::instrumented_base::initialize(17);
+		a9::instrumented_base::initialize();
 		f(v.begin(),v.end());
 
 		numel.push_back(num_el);
 		std::copy(a9::instrumented_base::counts,
 			a9::instrumented_base::counts+a9::instrumented_base::num_ops,
 			results_table[i].begin());
-		// note the +1
 
 		++i;
-		//std::copy(a9::instrumented_base::counts,
-		//	a9::instrumented_base::counts+a9::instrumented_base::num_ops,
-		//	curr_row.begin());
-		//results_table.push_back(curr_row);
 	}
 
-	a9::print_counts_table(a9::instrumented_base::op_names,results_table);
-
+	a9::print_counts_table(a9::instrumented_base::op_names,numel,results_table);
 }
 
 
@@ -63,7 +56,41 @@ struct std_sort_functor {
 	}
 };
 
+struct std_reverse_functor {
+	template<typename It>
+	void operator()(It beg, It end) const {
+		std::reverse(beg,end);
+	}
+};
 
+template<typename T>
+struct std_count_functor {
+	T val_;
+	std_count_functor(const T& val) : val_(val) {}
+	template<typename It>
+	void operator()(It beg, It end) const {
+		std::count(beg,end,val_);
+	}
+};
+
+
+struct swap_each_pair_functor {
+	template<typename It>
+	void operator()(It beg, It end) const {
+		It next = beg;
+		while (beg != end) {
+			// at start of loop, next == beg
+			++next;
+			if (next == end) {
+				return;
+			}
+			std::iter_swap(beg,next);
+			++beg;  // beg == next ( != end)
+			++beg;  // beg might == end
+			++next;  // next == beg; next might == end
+		}
+	}
+};
 
 
 

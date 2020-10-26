@@ -8,15 +8,11 @@
 
 std::size_t a9::instrumented_base::counts[];
 
-/*const char* a9::instrumented_base::op_names[a9::instrumented_base::num_ops] = 
-	{"def_ctor","copy_ctor","copy_assign","dtor",
-	"comp_eq","comp_lt"};*/
-
 std::vector<std::string> a9::instrumented_base::op_names {"def_ctor","copy_ctor","copy_assign","dtor",
 	"comp_eq","comp_lt"};
 
 
-void a9::instrumented_base::initialize(std::size_t what) {
+void a9::instrumented_base::initialize() {
 	std::fill(counts, counts+num_ops, 0);
 }
 
@@ -26,7 +22,6 @@ void a9::test_instrumented() {
 
 	/*assert(a != b);
 	assert(!(a==b));*/
-
 
 	std::cout << "a:  " << a << "\tb:  " << b << std::endl;
 	if (a == b) {
