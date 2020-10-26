@@ -7,7 +7,7 @@
 
 
 void a9::print_counts_table(const std::vector<std::string>& h, 
-						const std::vector<std::vector<std::size_t>>& t) {
+							const std::vector<std::vector<std::size_t>>& t) {
 
 	std::vector<std::size_t> max_w(h.size(),0);
 	for (std::size_t c = 0; c < h.size(); ++c) {
