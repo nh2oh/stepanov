@@ -12,22 +12,22 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{ed1377cd-40ef-4025-8b69-237b4713a7b3}</ProjectGuid>
-    <RootNamespace>stepanov</RootNamespace>
+    <ProjectGuid>{f5c55ddc-4ac2-4513-8308-2413b797ed4b}</ProjectGuid>
+    <RootNamespace>dummy_static_lib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -72,22 +72,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="actions_orbits.cpp" />
-    <ClCompile Include="function_objects.cpp" />
-    <ClCompile Include="fvector_int.cpp" />
-    <ClCompile Include="generic_algs.cpp" />
-    <ClCompile Include="iterators.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="strict_weak_ordered_t.cpp" />
+    <ClCompile Include="dummy_static_lib.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="actions_orbits.h" />
-    <ClInclude Include="function_objects.h" />
-    <ClInclude Include="fvector_int.h" />
-    <ClInclude Include="generic_algs.h" />
-    <ClInclude Include="iterators.h" />
-    <ClInclude Include="ordering.h" />
-    <ClInclude Include="strict_weak_ordered_t.h" />
+    <ClInclude Include="dummy_static_lib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

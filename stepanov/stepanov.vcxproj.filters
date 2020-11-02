@@ -33,6 +33,9 @@
     <ClCompile Include="actions_orbits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="iterators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fvector_int.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="actions_orbits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iterators.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

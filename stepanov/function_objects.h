@@ -73,7 +73,7 @@ struct binary_compose {
 
 	binary_compose(const F& f, const G& g, const H& h) : f_(f), g_(g), h_(h) {}
 
-	result_type operator()(const arg_g_t& x, const arg_h_t& y) const {
+	result_t operator()(const arg_g_t& x, const arg_h_t& y) const {
 		return f_(g_(x),h_(y));
 	}
 
@@ -83,8 +83,8 @@ struct binary_compose {
 // struct f_transpose takes f(x,y) and returns a function object that does f(y,x)
 template<typename F>
 struct f_transpose {
-	using arg_t = F::arg_t;
-	using result_t = F::result_t;
+	using arg_t = typename F::arg_t;
+	using result_t = typename F::result_t;
 
 	F f_;
 
