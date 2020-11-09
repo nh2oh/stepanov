@@ -78,6 +78,7 @@
     <ClCompile Include="generic_algs.cpp" />
     <ClCompile Include="iterators.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="reverse.cpp" />
     <ClCompile Include="strict_weak_ordered_t.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,7 @@
     <ClInclude Include="generic_algs.h" />
     <ClInclude Include="iterators.h" />
     <ClInclude Include="ordering.h" />
+    <ClInclude Include="reverse.h" />
     <ClInclude Include="strict_weak_ordered_t.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

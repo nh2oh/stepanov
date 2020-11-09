@@ -1,6 +1,6 @@
 #pragma once
-#include <utility>  // std::equal_to, std::pair
-
+#include <utility>  // std::pair
+#include <functional> // std::equal_to
 
 
 
