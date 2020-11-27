@@ -73,6 +73,67 @@ std::pair<I,I> reverse_n(I beg, I end, N n) {
 	return std::pair {beg,end};
 }
 
+// Copying versions of reverse ("4 useful variations")
+
+template<typename I, typename O>  // I models bidirectional iterator, O models output iterator
+O reverse_copy(I beg, I end, O dest) {
+	while (beg != end) {
+		--end;
+		*dest = *end;
+		++dest;
+	}
+}
+
+// result.first points at the last item copied, result.second points one past the last
+// item copied.  
+template<typename I, typename N, typename O>  // I models bidirectional iterator, O models output iterator
+std::pair<I,O> reverse_copy_n(I end, N n, O dest) {
+	while (n > N(0)) {
+		--end;
+		*dest = *end;
+		++dest;
+		--n;
+	}
+	return std::pair {end,dest};
+}
+
+template<typename I, typename O>  // I models input iterator, O models bidirectional iterator
+O copy_reverse(I beg, I end, O dest_end) {
+	while (beg != end) {
+		--dest_end;
+		*dest_end = *beg;
+		++beg;
+	}
+	return dest_end;
+}
+
+template<typename I, typename N, typename O>  // I models input iterator, O models bidirectional iterator
+std::pair<I,O> copy_reverse_n(I beg, N n, O dest_end) {
+	while (n > N(0)) {
+		--dest_end;
+		*dest_end = *beg;
+		++beg;
+		--n;
+	}
+	return std::pair {beg, dest_end};
+}
+
+// TODO:  test me
+template<typename I, typename B>  // I models forward iterator, B models bidirectional iterator
+void reverse_with_buffer(I beg, I end, B bffr_end) {
+	I curr = beg;
+	while (curr != end) {
+		--bffr_end;
+		*bffr_end = *curr;
+		++curr;
+	}
+
+	while (beg != end) {
+		*beg = *bffr_end;
+		++beg;
+		++bffr_end;
+	}
+}
 
 
 
