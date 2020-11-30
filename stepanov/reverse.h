@@ -1,7 +1,7 @@
 #pragma once
-#include <iterator>  // std::iter_swap()
+#include <iterator>  // std::iter_swap(), std::iterator_traits
 #include <utility> // std::pair
-
+#include "actions_orbits.h"  // nop::advance()
 
 //
 // Notes on Programming 2018 (Alexander Stepanov)
@@ -119,6 +119,7 @@ std::pair<I,O> copy_reverse_n(I beg, N n, O dest_end) {
 }
 
 // TODO:  test me
+// TODO:  bffr arg should point to the front of the buffer
 template<typename I, typename B>  // I models forward iterator, B models bidirectional iterator
 void reverse_with_buffer(I beg, I end, B bffr_end) {
 	I curr = beg;
@@ -136,8 +137,87 @@ void reverse_with_buffer(I beg, I end, B bffr_end) {
 }
 
 
+// bffr points to the *front* of the buffer
+// TODO:  Don't need end
+template<typename I, typename N, typename B>  // I models forward iterator, B models bidirectional iterator
+void reverse_n_with_buffer(I beg, I end, N n, B bffr) {
+	I curr = beg;
+	N m = n;
+	while (m > N(0)) {
+		*bffr = *curr;
+		++curr;
+		++bffr;
+		--m;
+	}
+
+	m = n;
+	while (m > N(0)) {
+		--bffr;
+		*beg = *bffr;
+		++beg;
+		--m;
+	}
+}
 
 
+// Quadratic in-place reverse that works with fwd iterators
+template<typename I>  // I models fwd iterator
+void reverse_in_place_quadratic(I beg, I end) {
+	typename std::iterator_traits<I>::difference_type n {0};
+	I last = beg;
+	while (last != end) {
+		++n;
+		++last;
+	}
+
+	while (n >= 2) {
+		last = beg;
+		nop::advance(last,n-1);
+		std::iter_swap(beg,last);
+		++beg;
+		n -= 2;
+	}
+}
+
+
+template<typename I1, typename I2>  // I1, I2 model forward iterator
+I2 swap_ranges(I1 beg1, I1 end1, I2 beg2) {
+	while (beg1 != end1) {
+		std::iter_swap(beg1,beg2);
+		++beg1;
+		++beg2;
+	}
+	return beg2;
+}
+
+template<typename I1, typename I2>  // I1, I2 model fwd iterator
+std::pair<I1,I2> swap_ranges(I1 beg1, I1 end1, I2 beg2, I2 end2) {
+	while ((beg1 != end1) && (beg2 != end2)) {
+		std::iter_swap(beg1,beg2);
+		++beg1;
+		++beg2;
+	}
+	return std::pair {beg1,beg2};
+}
+
+template<typename I1, typename N, typename I2>  // I1, I2 model fwd iterator
+std::pair<I1,I2> swap_ranges(I1 beg1, N n, I2 beg2) {
+	while (n > 0) {
+		std::iter_swap(beg1,beg2);
+		++beg1;
+		++beg2;
+		--n;
+	}
+	return std::pair {beg1,beg2};
+}
+
+
+
+
+//template<typename I, typename N>  // I models fwd iterator
+//I reverse_n_in_place(I beg, N n) {
+//	//...
+//}
 
 
 
