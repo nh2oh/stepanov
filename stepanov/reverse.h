@@ -190,6 +190,7 @@ I2 swap_ranges(I1 beg1, I1 end1, I2 beg2) {
 	return beg2;
 }
 
+// Result.first and result.second are one past the last element swapped from both ranges.  
 template<typename I1, typename I2>  // I1, I2 model fwd iterator
 std::pair<I1,I2> swap_ranges(I1 beg1, I1 end1, I2 beg2, I2 end2) {
 	while ((beg1 != end1) && (beg2 != end2)) {

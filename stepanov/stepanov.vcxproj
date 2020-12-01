@@ -89,6 +89,7 @@
     <ClInclude Include="iterators.h" />
     <ClInclude Include="ordering.h" />
     <ClInclude Include="reverse.h" />
+    <ClInclude Include="rotate.h" />
     <ClInclude Include="strict_weak_ordered_t.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
