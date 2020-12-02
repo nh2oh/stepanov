@@ -88,6 +88,7 @@
     <ClInclude Include="generic_algs.h" />
     <ClInclude Include="iterators.h" />
     <ClInclude Include="ordering.h" />
+    <ClInclude Include="permutations.h" />
     <ClInclude Include="reverse.h" />
     <ClInclude Include="rotate.h" />
     <ClInclude Include="strict_weak_ordered_t.h" />

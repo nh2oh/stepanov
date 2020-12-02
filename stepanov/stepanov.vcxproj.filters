@@ -68,5 +68,8 @@
     <ClInclude Include="rotate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="permutations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -87,12 +87,31 @@ void rotate_iterative_0(I f, I m, I l) {
 	}
 }
 
+// TODO:  Version with non-void return value
 
 
+//-----------------------------------------------------------------------------
+// Rotate for random access iterators
 
+template<typename I> // I models random access iterator
+class rotate_iterator_action {
+public:
+	rotate_iterator_action(I f, I m, I l) 
+		: forward(m-f), backward(m-l), new_rotation_point(f+(l-m)) {};
+
+	void operator()(I& it) {
+		it += it < new_rotation_point ? forward : backward;
+	}
+private:
+	typename std::iterator_traits<I>::distance_type forward;
+	typename std::iterator_traits<I>::distance_type backward;
+	// new_rotation_point is one past the end of the first subrange (after the rotation
+	// is complete), equal to the first element of the second subrange (after the
+	// rotation is complete).  
+	I new_rotation_point;
+};
 
 
 
 };  // namespace nop
-
 
