@@ -2,7 +2,7 @@
 #include <utility>  // std::pair
 #include <iterator>  // std::iter_swap
 #include "reverse.h"
-
+#include "permutations.h"  // nop::do_cycle()
 
 //
 // Notes on Programming 2018 (Alexander Stepanov)
