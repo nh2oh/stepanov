@@ -41,7 +41,7 @@ I partition(I beg, I end, P pred) {
 
 
 template<typename I, typename P> // I models bidirectional iterator
-I find_backward_if_not(I beg, I end, P pred) {
+I find_backward_if_not0(I beg, I end, P pred) {
 	if (end == beg) { return end; }
 	while (true) {
 		--end;
@@ -50,6 +50,15 @@ I find_backward_if_not(I beg, I end, P pred) {
 	}
 }
 
-
+// Finds the rightmost element in the range [beg,end) for which !pred and returns
+// its *successor*.  If all elements in the range satisfy pred, returns beg.  
+template<typename I, typename P>  // I models bidirectional iterator
+I find_backward_if_not(I beg, I end, P pred) {
+	while (beg != end) {
+		--end;
+		if (!pred(*end)) { return ++end; }
+	}
+	// end == beg && pred(*end)
+	return end;
 };  // namespace nop
 
