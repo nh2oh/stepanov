@@ -1,4 +1,6 @@
 #pragma once
+#include <iterator>  // std::iter_swap()
+#include<algorithm>  // std::find_if(), std::find_if_not()
 
 //
 // Notes on Programming 2018 (Alexander Stepanov)
@@ -24,9 +26,31 @@ bool is_partitioned(I beg, I pvt, I end, P pred) {
 }
 
 template<typename I, typename P>  // I models fwd iterator
-I partition(I beg, I end, P pred) {
+I partition_forward(I beg, I end, P pred) {
 	I pvt = std::find_if(beg,end,pred);
 	if (pvt == end) { return pvt; }
+	I curr = pvt;
+	++curr;
+	while (curr != end) {
+		if (!pred(*curr)) {
+			std::iter_swap(curr,pvt);
+			++pvt;
+		}
+		++curr;
+	}
+	return pvt;
+}
+
+template<typename I, typename P>  // I models fwd iterator
+I partition_forward_inline_find(I beg, I end, P pred) {
+	//I pvt = std::find_if(beg,end,pred);
+	I pvt = beg;
+	while (true) {
+		if (pvt==end) { return pvt; }
+		if (pred(*pvt)) { break; }
+		++pvt;
+	}
+	// if (pvt == end) { return pvt; }  // inline find allows this check to be dropped
 	I curr = pvt;
 	++curr;
 	while (curr != end) {
@@ -60,5 +84,46 @@ I find_backward_if_not(I beg, I end, P pred) {
 	}
 	// end == beg && pred(*end)
 	return end;
+}
+
+template<typename I, typename P>  // I models bidirectional iterator
+I partition_bidirectional_1(I beg, I end, P pred) {
+	while (true) {
+		beg = std::find_if(beg,end,pred);
+		end = nop::find_backward_if_not(beg,end,pred);
+		if (end == beg) { return beg; }
+		--end;
+		std::iter_swap(beg,end);
+		++beg;
+	}
+}
+
+// Inlined calls to find to generate a more optimal version
+template<typename I, typename P>  // I models bidirectional iterator
+I partition_bidirectional(I beg, I end, P pred) {
+	while (true) {
+		//beg = std::find_if(beg,end,pred);
+		while (true) {
+			if (beg == end) { return beg; }
+			if (pred(*beg)) { break; }
+			++beg;
+		}
+		// beg!=end && pred(*beg)
+
+		//end = nop::find_backward_if_not(beg,end,pred);
+		while (true) {
+			--end;
+			if (beg == end) { return ++beg; }
+			if (!pred(*end)) { break; }
+		}
+		// beg!=end && !pred(*end)
+
+		std::iter_swap(beg,end);
+		++beg;
+	}
+}
+
+
+
 };  // namespace nop
 
