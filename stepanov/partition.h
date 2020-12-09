@@ -1,6 +1,6 @@
 #pragma once
 #include <iterator>  // std::iter_swap()
-#include<algorithm>  // std::find_if(), std::find_if_not()
+#include <algorithm>  // std::find_if(), std::find_if_not()
 
 //
 // Notes on Programming 2018 (Alexander Stepanov)
