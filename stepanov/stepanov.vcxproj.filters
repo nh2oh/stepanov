@@ -74,5 +74,8 @@
     <ClInclude Include="partition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="linked_iterators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

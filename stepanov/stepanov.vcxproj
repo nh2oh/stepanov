@@ -87,6 +87,7 @@
     <ClInclude Include="fvector_int.h" />
     <ClInclude Include="generic_algs.h" />
     <ClInclude Include="iterators.h" />
+    <ClInclude Include="linked_iterators.h" />
     <ClInclude Include="ordering.h" />
     <ClInclude Include="partition.h" />
     <ClInclude Include="permutations.h" />

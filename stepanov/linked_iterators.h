@@ -61,25 +61,34 @@ std::pair<std::pair<I,I>,std::pair<I,I>> partition_node_reversed2(I beg, I end, 
 	I t_t = end;
 	I t_f = end;
 
-
+	if (beg == end) { goto exit; }
 	if (pred(*beg)) {
-		I next = successor(beg);
-		set_successor(beg,t_t);
-		t_t = beg;
-		beg = next;
-		while (pred(*beg)) {
-			beg = successor(beg);
-		}
+		h_t = beg;
+		goto current_true;
 	} else {
-		I next = successor(beg);
-		set_successor(beg,t_f);
-		t_f = beg;
-		beg = next;
-		while (!pred(*beg)) {
-			beg = successor(beg);
-		}
+		h_f = beg;
+		goto current_false;
 	}
 
+current_true:
+	do {
+		t_t = beg;
+		++beg;
+		if (beg == end) { goto exit; }
+	} while (pred(*beg));
+	t_f = beg;
+	goto current_false;
+
+current_false:
+	do {
+		t_f = beg;
+		++beg;
+		if (beg == end) { goto exit; }
+	} while (!pred(*beg));
+	t_t = beg;
+	goto current_true;
+
+exit:
 	return std::pair {std::pair<I,I> {h_f,t_f}, std::pair<I,I> {h_t,t_t}};
 }
 
