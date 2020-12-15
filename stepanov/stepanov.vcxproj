@@ -79,6 +79,7 @@
     <ClCompile Include="iterators.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reverse.cpp" />
+    <ClCompile Include="stable_partition.cpp" />
     <ClCompile Include="strict_weak_ordered_t.cpp" />
   </ItemGroup>
   <ItemGroup>

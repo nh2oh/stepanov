@@ -5,6 +5,7 @@
 #include "function_objects.h"
 #include "iterators.h"
 #include "reverse.h"
+#include "stable_partition.h"
 
 int main() {
 
@@ -12,7 +13,9 @@ int main() {
 
 	//nop::fvector_int_copy_assign();
 
-	nop::test_adjacent_swap_copy();
+	//nop::test_adjacent_swap_copy();
+
+	nop::test_stable_partition_with_buffer();
 
 	return 0;
 }
