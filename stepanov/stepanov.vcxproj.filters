@@ -42,6 +42,9 @@
     <ClCompile Include="stable_partition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reduction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fvector_int.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stable_partition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reduction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -78,6 +78,7 @@
     <ClCompile Include="generic_algs.cpp" />
     <ClCompile Include="iterators.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="reduction.cpp" />
     <ClCompile Include="reverse.cpp" />
     <ClCompile Include="stable_partition.cpp" />
     <ClCompile Include="strict_weak_ordered_t.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="ordering.h" />
     <ClInclude Include="partition.h" />
     <ClInclude Include="permutations.h" />
+    <ClInclude Include="reduction.h" />
     <ClInclude Include="reverse.h" />
     <ClInclude Include="rotate.h" />
     <ClInclude Include="stable_partition.h" />
