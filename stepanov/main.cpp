@@ -6,6 +6,7 @@
 #include "iterators.h"
 #include "reverse.h"
 #include "stable_partition.h"
+#include "reduction.h"
 
 int main() {
 
@@ -15,7 +16,9 @@ int main() {
 
 	//nop::test_adjacent_swap_copy();
 
-	nop::test_stable_partition_with_buffer();
+	//nop::test_stable_partition_with_buffer();
+
+	nop::test_stable_partition_slow_iterative();
 
 	return 0;
 }
